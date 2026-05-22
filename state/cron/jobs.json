@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "jobs": [
+    {
+      "id": "nightly-tech-brief",
+      "agentId": "main",
+      "name": "nightly-tech-brief",
+      "enabled": true,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 21 * * *",
+        "tz": "{{user_profile.timezone}}"
+      },
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Run the daily-quiz skill for the primary user. Use their stored preferences to generate and send the daily brief to them on Telegram."
+      },
+      "sessionTarget": "isolated"
+    }
+  ]
+}

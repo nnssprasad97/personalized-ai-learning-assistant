@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  openclaw:
+    build: .
+    container_name: openclaw-gateway
+    restart: unless-stopped
+    ports:
+      - "18789:18789"
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3:8b}
+    volumes:
+      - ./state:/app/state
+      - ./workspace:/app/workspace
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama-service
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+volumes:
+  ollama_data:

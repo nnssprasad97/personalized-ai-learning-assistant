@@ -1,0 +1,21 @@
+# Local state and databases
+state/*
+!state/cron/
+state/cron/*
+!state/cron/jobs.json
+workspace/*
+!workspace/AGENTS.md
+
+# Environment variables containing sensitive bot tokens and API keys
+.env
+.env.local
+
+# Node.js modules (if any get created locally)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS specific files
+.DS_Store
+Thumbs.db

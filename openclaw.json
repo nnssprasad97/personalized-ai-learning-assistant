@@ -1,0 +1,47 @@
+{
+  "agents": {
+    "defaults": {
+      "workspace": "/app/workspace",
+      "model": {
+        "primary": "ollama/llama3:8b"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "identity": {
+          "name": "Molty",
+          "theme": "helpful learning assistant",
+          "emoji": "🦞"
+        }
+      }
+    ]
+  },
+  "models": {
+    "providers": {
+      "ollama": {
+        "baseUrl": "http://ollama:11434",
+        "apiKey": "ollama-local"
+      }
+    }
+  },
+  "plugins": {
+    "entries": {
+      "telegram": {
+        "enabled": true,
+        "package": "@openclaw/plugin-telegram",
+        "config": {
+          "botToken": "${env.TELEGRAM_BOT_TOKEN}"
+        }
+      }
+    }
+  },
+  "standingOrders": [
+    {
+      "id": "onboarding-trigger",
+      "agentId": "main",
+      "condition": "memory.user_profile_{{user.id}} does not exist",
+      "action": { "kind": "runSkill", "skill": "user-onboarding" }
+    }
+  ]
+}
